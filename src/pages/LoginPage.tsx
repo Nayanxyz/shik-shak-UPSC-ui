@@ -79,4 +79,22 @@ export default function LoginPage() {
             </button>
           </div>
 
- 
+          {error && <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm">{error}</div>}
+
+          <button type="submit" disabled={loading}
+            className={cn("w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all", loading ? "bg-slate-800 text-slate-500 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-500")}>
+            {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
+            {!loading && <ArrowRight className="w-4 h-4" />}
+          </button>
+        </form>
+
+        <p className="text-center text-slate-400 text-sm">
+          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+          <button onClick={() => { setIsSignUp(!isSignUp); setError(''); }} className="text-indigo-400 hover:text-indigo-300 font-medium">
+            {isSignUp ? 'Sign In' : 'Sign Up'}
+          </button>
+        </p>
+      </motion.div>
+    </div>
+  );
+}
