@@ -57,4 +57,26 @@ export default function LoginPage() {
           <div className="relative flex justify-center text-sm"><span className="px-2 bg-slate-950 text-slate-400">or</span></div>
         </div>
 
+        <form onSubmit={handleEmailAuth} className="space-y-4">
+          {isSignUp && (
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:outline-none" />
+            </div>
+          )}
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:outline-none" />
+          </div>
+          <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input type={showPassword ? 'text' : 'password'} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
+              className="w-full pl-10 pr-12 py-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:outline-none" />
+            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300">
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+
  
