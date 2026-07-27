@@ -32,3 +32,8 @@ export default function LoginPage() {
     setLoading(false);
   };
 
+  const handleGoogle = async () => {
+    const { error } = await signInWithGoogle();
+    if (error) setError(error.message);
+  };
+
