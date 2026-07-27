@@ -7,3 +7,22 @@ export default function AuthCallback() {
   const navigate = useNavigate();
   const loadUser = useAuthStore((s) => s.loadUser);
 
+  useEffect(() => {
+    let unsubscribe: (() => void) | null = null;
+
+    const handleAuthCallback = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) { console.error('Auth callback error:', error); navigate('/login'); return; }
+      if (session) { await loadUser(); navigate('/'); }
+      else {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+          if (event === 'SIGNED_IN' && session) { await loadUser(); navigate('/'); }
+        });
+        unsubscribe = () => subscription.unsubscribe();
+      }
+    };
+
+    handleAuthCallback();
+    return () => { unsubscribe?.(); };
+  }, [loadUser, navigate]);
+
