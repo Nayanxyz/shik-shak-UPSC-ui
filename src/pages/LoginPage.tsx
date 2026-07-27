@@ -17,3 +17,18 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleEmailAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    if (isSignUp && !username.trim()) { setError('Username required'); setLoading(false); return; }
+
+    const { error: authError } = isSignUp
+      ? await signUpWithEmail(email, password, username)
+      : await signInWithEmail(email, password);
+
+    if (authError) setError(authError.message);
+    else { await loadUser(); navigate('/'); }
+    setLoading(false);
+  };
+
