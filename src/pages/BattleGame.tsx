@@ -64,3 +64,13 @@ export default function BattleGame() {
       }, 1000)
     }
 
+    const onGameOver = (data: any) => {
+      useGameStore.getState().setFinalRankings(data.rankings)
+      setFinalRankings(data.rankings)
+      setPhase('finished')
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+    }
+
