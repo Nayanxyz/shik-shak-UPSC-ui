@@ -27,3 +27,40 @@ export default function BattleGame() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // Socket listeners — attach once
+  useEffect(() => {
+    const socket = getSocket()
+
+    const onQuestionStart = (data: any) => {
+      useGameStore.getState().setQuestion(data, data.total_questions)
+      setPhase('playing')
+      setHasAnswered(false)
+      setSelectedOption(null)
+      startTimeRef.current = Date.now()
+    }
+
+    const onTimerTick = (data: { remaining: number }) => {
+      useGameStore.getState().setTimeRemaining(data.remaining)
+    }
+
+    const onQuestionResults = (data: any) => {
+      useGameStore.getState().setQuestionResults(data)
+      setPhase('results')
+    }
+
+    const onLeaderboard = (data: any) => {
+      setLeaderboard(data.rankings)
+      setNextQuestionIn(data.next_question_in || 3)
+      setPhase('leaderboard')
+
+      if (timerRef.current) clearInterval(timerRef.current)
+      let remaining = data.next_question_in || 3
+      timerRef.current = setInterval(() => {
+        remaining -= 1
+        setNextQuestionIn(remaining)
+        if (remaining <= 0 && timerRef.current) {
+          clearInterval(timerRef.current)
+          timerRef.current = null
+        }
+      }, 1000)
+    }
+
