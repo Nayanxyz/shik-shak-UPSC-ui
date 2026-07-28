@@ -195,3 +195,36 @@ export default function BattleGame() {
         )}
       </AnimatePresence>
 
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <Swords className="w-5 h-5 text-indigo-400" />
+          <span className="font-semibold text-slate-300">Room: {roomCode}</span>
+        </div>
+        <button
+          onClick={() => setShowExit(true)}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-red-500/20 hover:text-red-300 border border-slate-700 transition-all text-sm"
+        >
+          <LogOut className="w-4 h-4" /> Exit
+        </button>
+      </div>
+
+      {disconnected && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 p-3 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 flex items-center gap-2 text-sm"
+        >
+          <RefreshCw className="w-4 h-4 animate-spin" /> Reconnecting...
+        </motion.div>
+      )}
+
+      {error && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300"
+        >
+          {error}
+        </motion.div>
+      )}
+
