@@ -340,3 +340,121 @@ export default function BattleGame() {
           </motion.div>
         )}
 
+        {phase === 'leaderboard' && (
+          <motion.div key="leaderboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                <Trophy className="w-6 h-6 text-yellow-400" /> Leaderboard
+              </h2>
+              <p className="text-slate-400">Next question in {nextQuestionIn}s</p>
+            </div>
+            <div className="space-y-2">
+              {leaderboard.map((p: any, i: number) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className={cn(
+                    "flex items-center justify-between p-4 rounded-xl border",
+                    i === 0 ? "bg-yellow-500/10 border-yellow-500/30" :
+                    i === 1 ? "bg-slate-400/10 border-slate-400/30" :
+                    i === 2 ? "bg-orange-500/10 border-orange-500/30" :
+                    "bg-slate-900 border-slate-800"
+                  )}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={cn(
+                      "w-10 h-10 rounded-full flex items-center justify-center font-bold",
+                      i === 0 ? "bg-yellow-500 text-yellow-950" :
+                      i === 1 ? "bg-slate-400 text-slate-950" :
+                      i === 2 ? "bg-orange-500 text-orange-950" :
+                      "bg-slate-800 text-slate-400"
+                    )}>
+                      {i === 0 ? <Crown className="w-5 h-5" /> : i + 1}
+                    </div>
+                    <div>
+                      <div className="font-semibold">{p.name}</div>
+                      <div className="text-xs text-slate-400">{p.correct_count} correct • {p.accuracy}% accuracy</div>
+                    </div>
+                  </div>
+                  <div className="text-xl font-bold text-indigo-300">{p.total_score || p.score}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {phase === 'finished' && (
+          <motion.div key="finished" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="space-y-8">
+            <div className="text-center">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.2 }}
+                className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4"
+              >
+                <Trophy className="w-10 h-10 text-white" />
+              </motion.div>
+              <h2 className="text-3xl font-bold">Battle Complete!</h2>
+              <p className="text-slate-400 mt-2">Here are the final standings</p>
+            </div>
+            <div className="space-y-3">
+              {finalRankings.map((p: any, i: number) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className={cn(
+                    "flex items-center justify-between p-5 rounded-2xl border",
+                    i === 0 ? "bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/30" :
+                    i === 1 ? "bg-gradient-to-r from-slate-400/20 to-slate-500/20 border-slate-400/30" :
+                    i === 2 ? "bg-gradient-to-r from-orange-500/20 to-red-500/20 border-orange-500/30" :
+                    "bg-slate-900 border-slate-800"
+                  )}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={cn(
+                      "w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg",
+                      i === 0 ? "bg-yellow-500 text-yellow-950" :
+                      i === 1 ? "bg-slate-400 text-slate-950" :
+                      i === 2 ? "bg-orange-500 text-orange-950" :
+                      "bg-slate-800 text-slate-400"
+                    )}>
+                      {i === 0 ? <Crown className="w-6 h-6" /> : i + 1}
+                    </div>
+                    <div>
+                      <div className="font-bold text-lg">{p.name}</div>
+                      <div className="text-sm text-slate-400">
+                        {p.correct_count}/{p.correct_count + p.wrong_count + p.unanswered_count} correct • {p.accuracy}% accuracy • Streak: {p.max_streak}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-bold text-indigo-300">{p.total_score || p.score}</div>
+                    <div className="text-sm text-slate-400">points</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="flex gap-4">
+              <button
+                onClick={() => navigate('/battle/lobby')}
+                className="flex-1 py-4 rounded-xl font-semibold bg-indigo-600 hover:bg-indigo-500 transition-all flex items-center justify-center gap-2"
+              >
+                <Swords className="w-5 h-5" /> New Battle
+              </button>
+              <button
+                onClick={() => navigate('/')}
+                className="flex-1 py-4 rounded-xl font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-center gap-2"
+              >
+                <ArrowRight className="w-5 h-5" /> Home
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
