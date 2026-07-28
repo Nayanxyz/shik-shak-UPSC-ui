@@ -136,3 +136,20 @@ export default function BattleGame() {
     })
   }, [hasAnswered])
 
+  const handleExit = () => {
+    const socket = getSocket()
+    const store = useGameStore.getState()
+    if (socket && store.roomCode) {
+      socket.emit('leave_room', { room_code: store.roomCode })
+    }
+    useGameStore.getState().reset()
+    disconnectSocket()
+    navigate('/battle/lobby')
+  }
+
+  const question = useGameStore((s) => s.questions[s.currentQuestion - 1])
+  const currentQ = useGameStore((s) => s.currentQuestion)
+  const totalQ = useGameStore((s) => s.totalQuestions)
+  const timeRemaining = useGameStore((s) => s.timeRemaining)
+  const questionResults = useGameStore((s) => s.questionResults)
+
