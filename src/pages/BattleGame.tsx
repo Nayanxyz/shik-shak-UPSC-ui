@@ -119,3 +119,20 @@ export default function BattleGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, roomCode, authUser?.id])
 
+  const submitAnswer = useCallback((option: string | null) => {
+    if (hasAnswered) return
+    const socket = getSocket()
+    const store = useGameStore.getState()
+    if (!socket.connected || !store.roomCode) return
+
+    setHasAnswered(true)
+    setSelectedOption(option)
+
+    socket.emit('submit_answer', {
+      room_code: store.roomCode,
+      question_number: store.currentQuestion,
+      selected_option: option,
+      time_taken_ms: Date.now() - startTimeRef.current,
+    })
+  }, [hasAnswered])
+
