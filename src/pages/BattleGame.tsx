@@ -228,3 +228,64 @@ export default function BattleGame() {
         </motion.div>
       )}
 
+      <AnimatePresence mode="wait">
+        {phase === 'playing' && question && (
+          <motion.div
+            key="playing"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            className="space-y-6"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Swords className="w-5 h-5 text-indigo-400" />
+                <span className="font-semibold">Q{currentQ} / {totalQ}</span>
+              </div>
+              <div className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-full font-mono text-sm",
+                timeRemaining <= 10 ? "bg-red-500/20 text-red-300" : "bg-slate-800"
+              )}>
+                <Clock className="w-4 h-4" /> {timeRemaining}s
+              </div>
+            </div>
+
+            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                animate={{ width: `${(currentQ / totalQ) * 100}%` }}
+              />
+            </div>
+
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <MathHtml html={question.question_text} className="text-lg font-medium leading-relaxed" />
+            </div>
+
+            <div className="space-y-3">
+              {question.options.map((opt: any) => (
+                <button
+                  key={opt.id}
+                  onClick={() => !hasAnswered && submitAnswer(opt.id)}
+                  disabled={hasAnswered}
+                  className={cn(
+                    "w-full p-4 rounded-xl border text-left transition-all",
+                    hasAnswered
+                      ? selectedOption === opt.id
+                        ? "border-indigo-500 bg-indigo-500/20"
+                        : "border-slate-800 opacity-50"
+                      : "border-slate-700 hover:border-indigo-500 hover:bg-slate-900"
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={cn(
+                      "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm",
+                      selectedOption === opt.id ? "bg-indigo-500 text-white" : "bg-slate-800"
+                    )}>
+                      {opt.id}
+                    </span>
+                    <MathHtml html={opt.text} />
+                  </div>
+                </button>
+              ))}
+            </div>
+
