@@ -289,3 +289,54 @@ export default function BattleGame() {
               ))}
             </div>
 
+            {hasAnswered && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-center"
+              >
+                <div className="flex items-center justify-center gap-2 text-indigo-300">
+                  <Zap className="w-5 h-5" /> Answer submitted! Waiting for others...
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+
+        {phase === 'results' && questionResults && (
+          <motion.div key="results" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold mb-2">Question Results</h2>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-300">
+                <Target className="w-4 h-4" /> Correct Answer: {questionResults.correct_option}
+              </div>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <MathHtml html={questionResults.explanation || ''} className="text-slate-300" />
+            </div>
+            <div className="space-y-2">
+              {questionResults.player_results?.map((p: any, i: number) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "flex items-center justify-between p-3 rounded-lg",
+                    p.is_correct ? "bg-green-500/10 border border-green-500/20" : "bg-red-500/10 border border-red-500/20"
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    {p.is_correct ? (
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-red-400" />
+                    )}
+                    <span className="font-medium">{p.name}</span>
+                  </div>
+                  <span className={cn("font-mono font-bold", p.is_correct ? "text-green-300" : "text-red-300")}>
+                    +{p.score_gained}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
