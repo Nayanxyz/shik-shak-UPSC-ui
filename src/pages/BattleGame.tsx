@@ -74,3 +74,29 @@ export default function BattleGame() {
       }
     }
 
+    const onKicked = () => {
+      setError('You were kicked')
+      setTimeout(() => navigate('/battle/lobby'), 2000)
+    }
+
+    const onError = (data: any) => setError(data.message || 'Error')
+
+    const onConnect = () => {
+      setDisconnected(false)
+      if (roomCode && authUser?.id) {
+        socket.emit('rejoin_room', { room_code: roomCode, user_id: authUser.id })
+      }
+    }
+
+    const onDisconnect = () => setDisconnected(true)
+
+    socket.on('question_start', onQuestionStart)
+    socket.on('timer_tick', onTimerTick)
+    socket.on('question_results', onQuestionResults)
+    socket.on('leaderboard', onLeaderboard)
+    socket.on('game_over', onGameOver)
+    socket.on('kicked', onKicked)
+    socket.on('error', onError)
+    socket.on('connect', onConnect)
+    socket.on('disconnect', onDisconnect)
+
