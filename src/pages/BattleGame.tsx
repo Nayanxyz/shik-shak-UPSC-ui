@@ -100,3 +100,22 @@ export default function BattleGame() {
     socket.on('connect', onConnect)
     socket.on('disconnect', onDisconnect)
 
+    if (socket.connected && roomCode && authUser?.id) {
+      socket.emit('rejoin_room', { room_code: roomCode, user_id: authUser.id })
+    }
+
+    return () => {
+      socket.off('question_start', onQuestionStart)
+      socket.off('timer_tick', onTimerTick)
+      socket.off('question_results', onQuestionResults)
+      socket.off('leaderboard', onLeaderboard)
+      socket.off('game_over', onGameOver)
+      socket.off('kicked', onKicked)
+      socket.off('error', onError)
+      socket.off('connect', onConnect)
+      socket.off('disconnect', onDisconnect)
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate, roomCode, authUser?.id])
+
