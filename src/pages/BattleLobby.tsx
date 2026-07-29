@@ -220,3 +220,18 @@ export default function BattleLobby() {
     // If already connected, trigger rejoin immediately
     if (socket.connected) onConnect();
     
+    return () => {
+      socket.off('room_created', onRoomCreated);
+      socket.off('room_joined', onRoomJoined);
+      socket.off('player_joined', onPlayerJoined);
+      socket.off('player_left', onPlayerLeft);
+      socket.off('questions_ready', onQuestionsReady);
+      socket.off('kicked', onKicked);
+      socket.off('question_start', onQuestionStart);
+      socket.off('error', onError);
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
+
