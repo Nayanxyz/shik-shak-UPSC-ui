@@ -206,3 +206,17 @@ export default function BattleLobby() {
     
     const onDisconnect = () => setDisconnected(true);
     
+    socket.on('room_created', onRoomCreated);
+    socket.on('room_joined', onRoomJoined);
+    socket.on('player_joined', onPlayerJoined);
+    socket.on('player_left', onPlayerLeft);
+    socket.on('questions_ready', onQuestionsReady);
+    socket.on('kicked', onKicked);
+    socket.on('question_start', onQuestionStart);
+    socket.on('error', onError);
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    
+    // If already connected, trigger rejoin immediately
+    if (socket.connected) onConnect();
+    
