@@ -148,3 +148,21 @@ export default function BattleLobby() {
   const isHost = useGameStore((s) => s.isHost);
   const players = useGameStore((s) => s.players);
 
+  // ─── Socket Listeners (attach ONCE, never reattach) ───
+  useEffect(() => {
+    const socket = getSocket();
+    
+    const onRoomCreated = (data: any) => {
+      useGameStore.getState().setRoom(data.room_code, data.is_host);
+      useGameStore.getState().setPlayers(data.players);
+      setIsLoading(false);
+      setError('');
+    };
+    
+    const onRoomJoined = (data: any) => {
+      useGameStore.getState().setRoom(data.room_code, false);
+      useGameStore.getState().setPlayers(data.players);
+      setIsLoading(false);
+      setError('');
+    };
+    
