@@ -166,3 +166,19 @@ export default function BattleLobby() {
       setError('');
     };
     
+    const onPlayerJoined = (data: any) => {
+      useGameStore.getState().setPlayers(data.players);
+    };
+    
+    const onPlayerLeft = (data: any) => {
+      useGameStore.getState().setPlayers(data.players);
+    };
+    
+    const onQuestionsReady = () => setQuestionsReady(true);
+    
+    const onKicked = () => {
+      useGameStore.getState().reset();
+      setMode('menu');
+      setError('You were kicked from the room');
+    };
+    
