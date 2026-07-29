@@ -125,3 +125,26 @@ function getRandomChapters(subject: string, count = 5) {
   return [...ch].sort(() => Math.random() - 0.5).slice(0, count).map(c => c.id);
 }
 
+export default function BattleLobby() {
+  const navigate = useNavigate();
+  const authUser = useAuthStore((s) => s.user);
+  
+  const [mode, setMode] = useState<'menu' | 'create' | 'join'>('menu');
+  const [subject, setSubject] = useState('MATH');
+  const [difficulty, setDifficulty] = useState('LOW');
+  const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
+  const [maxPlayers, setMaxPlayers] = useState(4);
+  const [timePerQuestion, setTimePerQuestion] = useState(60);
+  const [playerName, setPlayerName] = useState(authUser?.username || '');
+  const [joinCode, setJoinCode] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showExit, setShowExit] = useState(false);
+  const [disconnected, setDisconnected] = useState(false);
+  const [questionsReady, setQuestionsReady] = useState(false);
+
+  const roomCode = useGameStore((s) => s.roomCode);
+  const isHost = useGameStore((s) => s.isHost);
+  const players = useGameStore((s) => s.players);
+
