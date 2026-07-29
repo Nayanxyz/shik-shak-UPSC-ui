@@ -182,3 +182,27 @@ export default function BattleLobby() {
       setError('You were kicked from the room');
     };
     
+    const onQuestionStart = () => {
+      if (!useGameStore.getState().isHost) {
+        const code = useGameStore.getState().roomCode;
+        if (code) navigate(`/battle/game/${code}`);
+      }
+    };
+    
+    const onError = (data: any) => {
+      setError(data.message || 'Server error');
+      setIsLoading(false);
+    };
+    
+    const onConnect = () => {
+      setDisconnected(false);
+      // Try to rejoin if we have a room
+      const code = useGameStore.getState().roomCode;
+      const uid = authUser?.id;
+      if (code && uid) {
+        socket.emit('rejoin_room', { room_code: code, user_id: uid });
+      }
+    };
+    
+    const onDisconnect = () => setDisconnected(true);
+    
