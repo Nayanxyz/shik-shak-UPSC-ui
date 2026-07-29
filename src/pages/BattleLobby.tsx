@@ -235,3 +235,40 @@ export default function BattleLobby() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
+  const toggleChapter = (id: string) => {
+    setSelectedChapters(prev => {
+      if (prev.includes(id)) return prev.filter(c => c !== id);
+      if (prev.length >= 5) return prev;
+      return [...prev, id];
+    });
+  };
+
+  const randomizeChapters = () => {
+    setSelectedChapters(getRandomChapters(subject, 5));
+  };
+
+  const createRoom = () => {
+    if (selectedChapters.length !== 5 || !playerName.trim()) return;
+    const socket = getSocket();
+    if (!socket.connected) {
+      setError('Not connected to server. Please wait or refresh.');
+      return;
+    }
+    setIsLoading(true);
+    setError('');
+    setQuestionsReady(false);
+    
+    socket.emit('create_room', {
+      subject,
+      difficulty,
+      chapter_mix: selectedChapters.map(id => {
+        const ch = MASTER_CHAPTER_DATABASE[subject].find(c => c.id === id);
+        return { id, name: ch?.name || id };
+      }),
+      player_name: playerName.trim(),
+      user_id: authUser?.id,
+      max_players: maxPlayers,
+      time_per_question: timePerQuestion,
+    });
+  };
+
