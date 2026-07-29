@@ -272,3 +272,19 @@ export default function BattleLobby() {
     });
   };
 
+  const joinRoom = () => {
+    if (!joinCode.trim() || !playerName.trim()) return;
+    const socket = getSocket();
+    if (!socket.connected) {
+      setError('Not connected to server. Please wait or refresh.');
+      return;
+    }
+    setIsLoading(true);
+    setError('');
+    socket.emit('join_room', {
+      room_code: joinCode.trim().toUpperCase(),
+      player_name: playerName.trim(),
+      user_id: authUser?.id,
+    });
+  };
+
