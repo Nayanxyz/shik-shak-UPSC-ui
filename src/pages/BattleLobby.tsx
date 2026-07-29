@@ -119,3 +119,9 @@ const MASTER_CHAPTER_DATABASE: Record<string, { id: string; name: string }[]> = 
   ]
 };
 
+function getRandomChapters(subject: string, count = 5) {
+  const ch = MASTER_CHAPTER_DATABASE[subject];
+  if (!ch || ch.length < count) return [];
+  return [...ch].sort(() => Math.random() - 0.5).slice(0, count).map(c => c.id);
+}
+
