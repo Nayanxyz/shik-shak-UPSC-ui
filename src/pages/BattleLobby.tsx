@@ -505,3 +505,74 @@ export default function BattleLobby() {
         </motion.div>
       )}
 
+      {/* ROOM */}
+      {roomCode && (
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-1">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm mb-2">
+                <Swords className="w-4 h-4" /> BATTLE MODE
+              </div>
+              <h2 className="text-2xl font-bold">Room: {roomCode}</h2>
+              <p className="text-slate-400 mt-1">{subject} • {difficulty}</p>
+            </div>
+            <button onClick={() => setShowExit(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-red-500/20 hover:text-red-300 border border-slate-700 transition-all text-sm shrink-0 ml-4">
+              <LogOut className="w-4 h-4" /> Leave
+            </button>
+          </div>
+
+          <div className="flex items-center justify-center gap-3">
+            <div className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 font-mono text-2xl tracking-[0.3em]">
+              {roomCode}
+            </div>
+            <button onClick={copyCode} className="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition-colors">
+              {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
+            </button>
+          </div>
+
+          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
+            <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5 text-slate-400" /> Players ({players.length})
+            </h3>
+            <div className="space-y-2">
+              {players.map((p: any) => (
+                <div key={p.sid} className={cn("flex items-center justify-between p-3 rounded-xl border",
+                  p.sid === players[0]?.sid && isHost ? "bg-yellow-500/10 border-yellow-500/30" : "bg-slate-800/50 border-slate-700")}>
+                  <div className="flex items-center gap-3">
+                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center font-bold",
+                      p.sid === players[0]?.sid && isHost ? "bg-yellow-500 text-yellow-950" : "bg-slate-700")}>
+                      {p.sid === players[0]?.sid && isHost ? <Crown className="w-5 h-5" /> : p.name[0]}
+                    </div>
+                    <div className="font-medium flex items-center gap-2">
+                      {p.name}
+                      {p.sid === players[0]?.sid && isHost && <span className="text-xs px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300">Host</span>}
+                      {!p.connected && <span className="text-xs px-2 py-0.5 rounded-full bg-red-500/20 text-red-300">Disconnected</span>}
+                    </div>
+                  </div>
+                  {isHost && p.sid !== players[0]?.sid && p.connected && (
+                    <button onClick={() => kickPlayer(p.sid)} className="p-2 rounded-lg hover:bg-red-500/20 text-slate-400 hover:text-red-400">
+                      <UserX className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {isHost ? (
+            <button onClick={startGame} disabled={!questionsReady}
+              className={cn("w-full py-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2",
+                questionsReady ? "bg-indigo-600 hover:bg-indigo-500" : "bg-slate-700 text-slate-400 cursor-not-allowed")}>
+              {questionsReady ? <><Swords className="w-5 h-5" /> Start Battle</> : <><RefreshCw className="w-5 h-5 animate-spin" /> Generating Questions...</>}
+            </button>
+          ) : (
+            <div className="text-center p-4 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
+              Waiting for host to start...
+            </div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+}
