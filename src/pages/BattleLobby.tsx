@@ -319,3 +319,28 @@ export default function BattleLobby() {
     }
   };
 
+  // ─── Render ───
+  return (
+    <div className="max-w-4xl mx-auto">
+      <AnimatePresence>
+        {showExit && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
+              className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-md w-full space-y-4">
+              <div className="flex items-center gap-3 text-yellow-400">
+                <AlertCircle className="w-6 h-6" />
+                <h3 className="text-xl font-bold">Leave Room?</h3>
+              </div>
+              <p className="text-slate-400">If you leave, you'll lose your spot.</p>
+              <div className="flex gap-3">
+                <button onClick={() => setShowExit(false)} className="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 font-medium">Stay</button>
+                <button onClick={leaveRoom} className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-500 font-medium flex items-center justify-center gap-2">
+                  <LogOut className="w-4 h-4" /> Leave
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
