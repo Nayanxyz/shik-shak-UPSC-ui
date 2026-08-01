@@ -377,3 +377,43 @@ export default function BattleLobby() {
         </motion.div>
       )}
 
+      {/* CREATE */}
+      {mode === 'create' && !roomCode && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+          <button onClick={() => setMode('menu')} className="text-slate-400 hover:text-white text-sm">← Back</button>
+          
+          <div>
+            <label className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Your Name</label>
+            <input type="text" value={playerName} onChange={e => setPlayerName(e.target.value)}
+              placeholder="Enter your name"
+              className="w-full mt-2 p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Subject</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {SUBJECTS.map(s => (
+                <button key={s} onClick={() => { setSubject(s); setSelectedChapters([]); }}
+                  className={cn("p-4 rounded-xl border transition-all text-left",
+                    subject === s ? "border-indigo-500 bg-indigo-500/20 text-indigo-300" : "border-slate-700 bg-slate-900 hover:border-slate-600")}>
+                  <BookOpen className="w-5 h-5 mb-2" />
+                  <div className="font-semibold">{s}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Difficulty</h3>
+            <div className="flex gap-3">
+              {DIFFICULTIES.map(d => (
+                <button key={d} onClick={() => setDifficulty(d)}
+                  className={cn("flex-1 p-4 rounded-xl border transition-all",
+                    difficulty === d ? (d === 'LOW' ? "border-green-500 bg-green-500/20 text-green-300" : "border-red-500 bg-red-500/20 text-red-300") : "border-slate-700 bg-slate-900 hover:border-slate-600")}>
+                  <Zap className="w-5 h-5 mb-2" />
+                  <div className="font-semibold">{d === 'LOW' ? 'Foundation' : 'Advanced'}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
