@@ -344,3 +344,13 @@ export default function BattleLobby() {
         )}
       </AnimatePresence>
 
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold mb-2">Battle Arena</h1>
+        <p className="text-slate-400">Create a room or join an existing battle</p>
+        {disconnected && (
+          <div className="mt-4 flex items-center justify-center gap-2 text-yellow-400 text-sm">
+            <RefreshCw className="w-4 h-4 animate-spin" /> Reconnecting...
+          </div>
+        )}
+      </div>
+
