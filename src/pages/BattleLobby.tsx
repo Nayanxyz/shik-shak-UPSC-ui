@@ -288,3 +288,13 @@ export default function BattleLobby() {
     });
   };
 
+  const leaveRoom = () => {
+    const socket = getSocket();
+    if (socket && roomCode) socket.emit('leave_room', { room_code: roomCode });
+    useGameStore.getState().reset();
+    disconnectSocket();
+    setShowExit(false);
+    setQuestionsReady(false);
+    setMode('menu');
+  };
+
