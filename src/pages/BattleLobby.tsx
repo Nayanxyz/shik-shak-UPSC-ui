@@ -354,3 +354,26 @@ export default function BattleLobby() {
         )}
       </div>
 
+      {/* MENU */}
+      {mode === 'menu' && !roomCode && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-6">
+          <button onClick={() => setMode('create')}
+            className="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-all hover:scale-[1.02] text-left group">
+            <div className="w-14 h-14 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4 group-hover:bg-indigo-500/30">
+              <Plus className="w-7 h-7 text-indigo-400" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Create Room</h3>
+            <p className="text-slate-400">Host a new battle and invite friends</p>
+          </button>
+
+          <button onClick={() => setMode('join')}
+            className="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 transition-all hover:scale-[1.02] text-left group">
+            <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4 group-hover:bg-purple-500/30">
+              <LogIn className="w-7 h-7 text-purple-400" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Join Room</h3>
+            <p className="text-slate-400">Enter a room code to join a battle</p>
+          </button>
+        </motion.div>
+      )}
+
