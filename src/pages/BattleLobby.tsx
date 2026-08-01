@@ -476,3 +476,32 @@ export default function BattleLobby() {
         </motion.div>
       )}
 
+      {/* JOIN */}
+      {mode === 'join' && !roomCode && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 max-w-md mx-auto">
+          <button onClick={() => setMode('menu')} className="text-slate-400 hover:text-white text-sm">← Back</button>
+          <div>
+            <label className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Your Name</label>
+            <input type="text" value={playerName} onChange={e => setPlayerName(e.target.value)}
+              placeholder="Enter your name" className="w-full mt-2 p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-purple-500 focus:outline-none" />
+          </div>
+          <div>
+            <label className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Room Code</label>
+            <input type="text" value={joinCode} onChange={e => setJoinCode(e.target.value.toUpperCase())}
+              placeholder="e.g. ABC123" maxLength={6}
+              className="w-full mt-2 p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-purple-500 focus:outline-none font-mono text-lg tracking-widest text-center uppercase" />
+          </div>
+          {error && (
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" /> {error}
+            </div>
+          )}
+          <button onClick={joinRoom}
+            disabled={!joinCode.trim() || !playerName.trim() || isLoading}
+            className={cn("w-full py-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2",
+              joinCode.trim() && playerName.trim() && !isLoading ? "bg-purple-600 hover:bg-purple-500 hover:scale-[1.02]" : "bg-slate-800 text-slate-500 cursor-not-allowed")}>
+            {isLoading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><LogIn className="w-5 h-5" /> Join Battle</>}
+          </button>
+        </motion.div>
+      )}
+
