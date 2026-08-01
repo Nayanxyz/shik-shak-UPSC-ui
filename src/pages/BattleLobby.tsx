@@ -461,3 +461,18 @@ export default function BattleLobby() {
             </div>
           </div>
 
+          {error && (
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" /> {error}
+            </div>
+          )}
+
+          <button onClick={createRoom}
+            disabled={selectedChapters.length !== 5 || !playerName.trim() || isLoading}
+            className={cn("w-full py-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2",
+              selectedChapters.length === 5 && playerName.trim() && !isLoading ? "bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02]" : "bg-slate-800 text-slate-500 cursor-not-allowed")}>
+            {isLoading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><Swords className="w-5 h-5" /> Create Battle Room</>}
+          </button>
+        </motion.div>
+      )}
+
