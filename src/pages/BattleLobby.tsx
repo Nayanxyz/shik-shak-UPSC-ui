@@ -298,3 +298,24 @@ export default function BattleLobby() {
     setMode('menu');
   };
 
+  const kickPlayer = (targetSid: string) => {
+    const socket = getSocket();
+    if (socket && isHost) socket.emit('kick_player', { room_code: roomCode, target_sid: targetSid });
+  };
+
+  const copyCode = () => {
+    if (roomCode) {
+      navigator.clipboard.writeText(roomCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const startGame = () => {
+    const socket = getSocket();
+    if (socket && isHost && roomCode) {
+      socket.emit('start_game', { room_code: roomCode });
+      navigate(`/battle/game/${roomCode}`);
+    }
+  };
+
