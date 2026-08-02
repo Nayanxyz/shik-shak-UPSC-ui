@@ -45,3 +45,20 @@ export default function HomePage() {
           </div>
         </motion.div>
       </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-center mb-8">Choose Your Subject</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {subjects.map((s, i) => (
+            <motion.button key={s.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
+              onClick={() => navigate('/practice')}
+              className={cn("p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all hover:scale-105 text-left group bg-gradient-to-br", s.bg)}>
+              <div className={cn("w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center text-2xl mb-4", s.color)}>{s.icon}</div>
+              <h3 className="font-bold text-lg">{s.name}</h3>
+              <p className="text-slate-400 text-sm mt-1">JEE/NEET level</p>
+              <ChevronRight className="w-5 h-5 mt-4 text-slate-500 group-hover:text-white transition-colors" />
+            </motion.button>
+          ))}
+        </div>
+      </section>
+
