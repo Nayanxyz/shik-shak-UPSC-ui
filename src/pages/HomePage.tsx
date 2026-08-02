@@ -10,3 +10,13 @@ const features = [
   { icon: <Clock className="w-6 h-6" />, title: 'Time Bonuses', desc: 'Answer fast for extra points — speed matters!' },
 ];
 
+const subjects = [
+  { name: 'Mathematics', color: 'from-blue-500 to-cyan-500', icon: '∫', bg: 'from-blue-500/10 to-cyan-500/10' },
+  { name: 'Physics', color: 'from-orange-500 to-red-500', icon: '⚡', bg: 'from-orange-500/10 to-red-500/10' },
+  { name: 'Chemistry', color: 'from-green-500 to-emerald-500', icon: '⚗️', bg: 'from-green-500/10 to-emerald-500/10' },
+  { name: 'Biology', color: 'from-pink-500 to-rose-500', icon: '🧬', bg: 'from-pink-500/10 to-rose-500/10' },
+];
+
+export default function HomePage() {
+  const navigate = useNavigate();
+
