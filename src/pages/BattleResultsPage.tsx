@@ -5,3 +5,14 @@ import { Trophy, Crown, Swords, ArrowRight, Zap, Target, Users } from 'lucide-re
 import { cn } from '../lib/utils';
 import { useGameStore } from '../store/gameStore';
 
+export default function BattleResultsPage() {
+  const { roomCode } = useParams();
+  const navigate = useNavigate();
+  const rankings = useGameStore((s) => s.finalRankings) || [];
+
+  useEffect(() => {
+    if (!rankings.length) navigate('/battle/lobby');
+  }, [rankings, navigate]);
+
+  if (!rankings.length) return null;
+
