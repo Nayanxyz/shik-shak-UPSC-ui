@@ -62,3 +62,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((f, i) => (
+          <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 + i * 0.1 }}
+            className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4">{f.icon}</div>
+            <h3 className="font-semibold mb-2">{f.title}</h3>
+            <p className="text-slate-400 text-sm">{f.desc}</p>
+          </motion.div>
+        ))}
+      </section>
+
