@@ -73,3 +73,22 @@ export default function HomePage() {
         ))}
       </section>
 
+      <section className="py-8 px-6 rounded-2xl bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-indigo-500/20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {[
+            { label: 'Questions Generated', value: '∞', sub: 'AI-powered' },
+            { label: 'Subjects', value: '4', sub: 'Math, Physics, Chem, Bio' },
+            { label: 'Battle Players', value: '4', sub: 'Max per room' },
+            { label: 'Time Limit', value: '60s', sub: 'Per question' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="text-3xl font-bold text-indigo-300">{stat.value}</div>
+              <div className="text-sm font-medium mt-1">{stat.label}</div>
+              <div className="text-xs text-slate-400">{stat.sub}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
