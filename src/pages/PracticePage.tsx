@@ -141,3 +141,25 @@ export default function PracticePage() {
   const timerActiveRef = useRef(false)
   const submitTriggeredRef = useRef(false)
 
+  // FIX: handleSubmit declared BEFORE the useEffect that references it
+  const handleSubmit = useCallback(async (option: string | null) => {
+    if (!session || showResult) return
+    const qNum = currentQ + 1
+    try {
+      const data = await apiFetch('/api/practice/answer', {
+        method: 'POST',
+        body: JSON.stringify({
+          session_id: session.session_id,
+          question_number: qNum,
+          selected_option: option,
+        }),
+      })
+      setResult(data)
+      setShowResult(true)
+      timerActiveRef.current = false
+    } catch (e) {
+      console.error(e)
+    }
+  }, [session, showResult, currentQ])
+
+  // Timer effect — now safely references handleSubmit above
