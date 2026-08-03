@@ -190,3 +190,34 @@ export default function PracticePage() {
       })
     }, 1000)
 
+    return () => {
+      clearInterval(timer)
+      timerActiveRef.current = false
+    }
+  }, [step, showResult, timeRemaining, handleSubmit])
+
+  const toggleChapter = (id: string) => {
+    setSelectedChapters(prev => {
+      if (prev.includes(id)) return prev.filter(c => c !== id)
+      if (prev.length >= 5) return prev
+      return [...prev, id]
+    })
+  }
+
+  const randomizeChapters = () => setSelectedChapters(getRandomChapters(subject, 5))
+
+  const startPractice = async () => {
+    if (selectedChapters.length !== 5) return
+    setStep('loading')
+    setError('')
+    try {
+      const chapterMix = selectedChapters.map(id => {
+        const ch = MASTER_CHAPTER_DATABASE[subject].find(c => c.id === id)
+        return { id, name: ch?.name || id }
+      })
+
+      const data = await apiFetch('/api/practice/start', {
+        method: 'POST',
+        body: JSON.stringify({ subject, difficulty, chapter_mix: chapterMix }),
+      })
+
