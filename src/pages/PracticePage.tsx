@@ -124,3 +124,20 @@ function getRandomChapters(subject: string, count = 5) {
   return [...ch].sort(() => Math.random() - 0.5).slice(0, count).map(c => c.id)
 }
 
+export default function PracticePage() {
+  const navigate = useNavigate()
+  const [step, setStep] = useState<'select' | 'loading' | 'playing'>('select')
+  const [subject, setSubject] = useState('MATH')
+  const [difficulty, setDifficulty] = useState('LOW')
+  const [selectedChapters, setSelectedChapters] = useState<string[]>([])
+  const [session, setSession] = useState<any>(null)
+  const [currentQ, setCurrentQ] = useState(0)
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [timeRemaining, setTimeRemaining] = useState(60)
+  const [showResult, setShowResult] = useState(false)
+  const [result, setResult] = useState<any>(null)
+  const [error, setError] = useState('')
+
+  const timerActiveRef = useRef(false)
+  const submitTriggeredRef = useRef(false)
+
