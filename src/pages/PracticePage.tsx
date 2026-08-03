@@ -163,3 +163,30 @@ export default function PracticePage() {
   }, [session, showResult, currentQ])
 
   // Timer effect — now safely references handleSubmit above
+  useEffect(() => {
+    if (step !== 'playing' || showResult) {
+      timerActiveRef.current = false
+      return
+    }
+    if (timeRemaining <= 0) {
+      timerActiveRef.current = false
+      if (!submitTriggeredRef.current) {
+        submitTriggeredRef.current = true
+        handleSubmit(null)
+      }
+      return
+    }
+    if (timerActiveRef.current) return
+    timerActiveRef.current = true
+
+    const timer = setInterval(() => {
+      setTimeRemaining(t => {
+        if (t <= 1) {
+          clearInterval(timer)
+          timerActiveRef.current = false
+          return 0
+        }
+        return t - 1
+      })
+    }, 1000)
+
