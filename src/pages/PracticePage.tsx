@@ -316,3 +316,44 @@ export default function PracticePage() {
               </div>
             </div>
 
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                  Chapters ({selectedChapters.length}/5 selected)
+                </h3>
+                <button
+                  onClick={randomizeChapters}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 text-sm hover:bg-indigo-600/30 transition-colors"
+                >
+                  <Dices className="w-4 h-4" />
+                  Random 5
+                </button>
+              </div>
+              <div className="grid md:grid-cols-2 gap-2 max-h-80 overflow-y-auto pr-2">
+                {MASTER_CHAPTER_DATABASE[subject].map(ch => (
+                  <button
+                    key={ch.id}
+                    onClick={() => toggleChapter(ch.id)}
+                    className={cn(
+                      "p-3 rounded-lg border text-left text-sm transition-all",
+                      selectedChapters.includes(ch.id)
+                        ? "border-indigo-500 bg-indigo-500/20 text-indigo-300"
+                        : "border-slate-700 bg-slate-900 hover:border-slate-600"
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "w-5 h-5 rounded border flex items-center justify-center text-xs shrink-0",
+                        selectedChapters.includes(ch.id)
+                          ? "bg-indigo-500 border-indigo-500 text-white"
+                          : "border-slate-600"
+                      )}>
+                        {selectedChapters.includes(ch.id) && '✓'}
+                      </div>
+                      <span className="truncate">{ch.name}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
