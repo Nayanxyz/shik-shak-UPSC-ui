@@ -253,3 +253,19 @@ export default function PracticePage() {
 
   const question = session?.questions?.[currentQ]
 
+  return (
+    <div className="max-w-4xl mx-auto">
+      <AnimatePresence mode="wait">
+        {step === 'select' && (
+          <motion.div
+            key="select"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-8"
+          >
+            <div className="text-center">
+              <h1 className="text-3xl font-bold mb-2">Practice Mode</h1>
+              <p className="text-slate-400">Select your subject, difficulty, and 5 chapters</p>
+            </div>
+
