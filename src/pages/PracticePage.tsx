@@ -236,3 +236,20 @@ export default function PracticePage() {
     }
   }
 
+  const nextQuestion = () => {
+    if (!session) return
+    if (currentQ + 1 >= session.total_questions) {
+      navigate(`/practice/results?sessionId=${session.session_id}`)
+      return
+    }
+    setCurrentQ(prev => prev + 1)
+    setTimeRemaining(session.time_per_question || 60)
+    setSelectedOption(null)
+    setShowResult(false)
+    setResult(null)
+    timerActiveRef.current = false
+    submitTriggeredRef.current = false
+  }
+
+  const question = session?.questions?.[currentQ]
+
