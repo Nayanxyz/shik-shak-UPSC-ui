@@ -378,3 +378,16 @@ export default function PracticePage() {
           </motion.div>
         )}
 
+        {step === 'loading' && (
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center justify-center py-32"
+          >
+            <div className="w-16 h-16 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin mb-6" />
+            <h2 className="text-xl font-semibold">Generating Questions...</h2>
+            <p className="text-slate-400 mt-2">Groq AI is crafting your personalized exam</p>
+          </motion.div>
+        )}
+
