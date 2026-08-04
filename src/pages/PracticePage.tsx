@@ -357,3 +357,24 @@ export default function PracticePage() {
               </div>
             </div>
 
+            {error && (
+              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm">
+                {error}
+              </div>
+            )}
+
+            <button
+              onClick={startPractice}
+              disabled={selectedChapters.length !== 5}
+              className={cn(
+                "w-full py-4 rounded-xl font-semibold text-lg transition-all",
+                selectedChapters.length === 5
+                  ? "bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02]"
+                  : "bg-slate-800 text-slate-500 cursor-not-allowed"
+              )}
+            >
+              Start Practice Session
+            </button>
+          </motion.div>
+        )}
+
