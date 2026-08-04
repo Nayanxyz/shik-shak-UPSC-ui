@@ -464,3 +464,51 @@ export default function PracticePage() {
               ))}
             </div>
 
+            {!showResult ? (
+              <button
+                onClick={() => handleSubmit(selectedOption)}
+                disabled={!selectedOption}
+                className={cn(
+                  "w-full py-4 rounded-xl font-semibold transition-all",
+                  selectedOption
+                    ? "bg-indigo-600 hover:bg-indigo-500"
+                    : "bg-slate-800 text-slate-500 cursor-not-allowed"
+                )}
+              >
+                Submit Answer
+              </button>
+            ) : (
+              <div className="space-y-4">
+                <div className={cn(
+                  "p-4 rounded-xl border flex items-center gap-3",
+                  result?.is_correct
+                    ? "border-green-500/30 bg-green-500/10"
+                    : "border-red-500/30 bg-red-500/10"
+                )}>
+                  {result?.is_correct ? (
+                    <CheckCircle className="w-6 h-6 text-green-400 shrink-0" />
+                  ) : (
+                    <XCircle className="w-6 h-6 text-red-400 shrink-0" />
+                  )}
+                  <div>
+                    <div className={cn("font-semibold", result?.is_correct ? "text-green-300" : "text-red-300")}>
+                      {result?.is_correct ? 'Correct! +' + result.score + ' points' : 'Incorrect (-1 point)'}
+                    </div>
+                    <MathHtml html={result?.explanation || ''} className="text-sm text-slate-400 mt-1" />
+                  </div>
+                </div>
+                <button
+                  onClick={nextQuestion}
+                  className="w-full py-4 rounded-xl font-semibold bg-indigo-600 hover:bg-indigo-500 transition-all flex items-center justify-center gap-2"
+                >
+                  {currentQ + 1 >= session.total_questions ? 'View Results' : 'Next Question'}
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
