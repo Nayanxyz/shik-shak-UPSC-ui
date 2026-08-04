@@ -391,3 +391,76 @@ export default function PracticePage() {
           </motion.div>
         )}
 
+        {step === 'playing' && question && (
+          <motion.div
+            key="playing"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="space-y-6"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm text-slate-400">
+                <Brain className="w-4 h-4" />
+                Question {currentQ + 1} of {session.total_questions}
+              </div>
+              <div className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-mono",
+                timeRemaining <= 10 ? "bg-red-500/20 text-red-300" : "bg-slate-800"
+              )}>
+                <Clock className="w-4 h-4" />
+                {timeRemaining}s
+              </div>
+            </div>
+
+            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                initial={{ width: 0 }}
+                animate={{ width: `${((currentQ + 1) / session.total_questions) * 100}%` }}
+              />
+            </div>
+
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <MathHtml html={question.question_text} className="text-lg font-medium leading-relaxed" />
+            </div>
+
+            <div className="space-y-3">
+              {question.options.map((opt: any) => (
+                <button
+                  key={opt.id}
+                  onClick={() => !showResult && setSelectedOption(opt.id)}
+                  disabled={showResult}
+                  className={cn(
+                    "w-full p-4 rounded-xl border text-left transition-all",
+                    showResult
+                      ? opt.id === result?.correct_option
+                        ? "border-green-500 bg-green-500/20"
+                        : opt.id === selectedOption && opt.id !== result?.correct_option
+                          ? "border-red-500 bg-red-500/20"
+                          : "border-slate-800 opacity-50"
+                      : selectedOption === opt.id
+                        ? "border-indigo-500 bg-indigo-500/20"
+                        : "border-slate-700 hover:border-slate-600 hover:bg-slate-900"
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={cn(
+                      "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0",
+                      showResult
+                        ? opt.id === result?.correct_option
+                          ? "bg-green-500 text-white"
+                          : opt.id === selectedOption
+                            ? "bg-red-500 text-white"
+                            : "bg-slate-800"
+                        : selectedOption === opt.id
+                          ? "bg-indigo-500 text-white"
+                          : "bg-slate-800"
+                    )}>
+                      {opt.id}
+                    </span>
+                    <MathHtml html={opt.text} />
+                  </div>
+                </button>
+              ))}
+            </div>
+
