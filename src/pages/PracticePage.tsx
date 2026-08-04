@@ -269,3 +269,24 @@ export default function PracticePage() {
               <p className="text-slate-400">Select your subject, difficulty, and 5 chapters</p>
             </div>
 
+            <div>
+              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Subject</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {SUBJECTS.map(s => (
+                  <button
+                    key={s}
+                    onClick={() => { setSubject(s); setSelectedChapters([]) }}
+                    className={cn(
+                      "p-4 rounded-xl border transition-all text-left",
+                      subject === s
+                        ? "border-indigo-500 bg-indigo-500/20 text-indigo-300"
+                        : "border-slate-700 bg-slate-900 hover:border-slate-600"
+                    )}
+                  >
+                    <BookOpen className="w-5 h-5 mb-2" />
+                    <div className="font-semibold">{s}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
