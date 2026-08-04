@@ -221,3 +221,18 @@ export default function PracticePage() {
         body: JSON.stringify({ subject, difficulty, chapter_mix: chapterMix }),
       })
 
+      setSession(data)
+      setCurrentQ(0)
+      setTimeRemaining(data.time_per_question || 60)
+      setSelectedOption(null)
+      setShowResult(false)
+      setResult(null)
+      timerActiveRef.current = false
+      submitTriggeredRef.current = false
+      setStep('playing')
+    } catch (e: any) {
+      setError(e.message)
+      setStep('select')
+    }
+  }
+
