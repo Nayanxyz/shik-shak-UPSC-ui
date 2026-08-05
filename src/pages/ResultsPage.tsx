@@ -39,3 +39,12 @@ export default function ResultsPage() {
     </div>
   );
 
+  if (error) return (
+    <div className="max-w-2xl mx-auto text-center py-16">
+      <XCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+      <h2 className="text-xl font-bold mb-2">Failed to load results</h2>
+      <p className="text-slate-400 mb-6">{error}</p>
+      <button onClick={() => navigate('/practice')} className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-semibold">Try Again</button>
+    </div>
+  );
+
