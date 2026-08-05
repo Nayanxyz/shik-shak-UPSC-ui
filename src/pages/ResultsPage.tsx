@@ -93,3 +93,33 @@ export default function ResultsPage() {
           </div>
         </div>
 
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-slate-400">Accuracy</span>
+            <span className="text-sm font-bold text-indigo-300">{accuracy}%</span>
+          </div>
+          <div className="h-4 bg-slate-800 rounded-full overflow-hidden">
+            <motion.div initial={{ width: 0 }} animate={{ width: `${accuracy}%` }} transition={{ duration: 1, delay: 0.5 }}
+              className={cn("h-full rounded-full", accuracy >= 80 ? "bg-gradient-to-r from-green-500 to-emerald-500" : accuracy >= 60 ? "bg-gradient-to-r from-yellow-500 to-orange-500" : "bg-gradient-to-r from-red-500 to-orange-500")} />
+          </div>
+        </div>
+
+        <div className={cn("p-4 rounded-xl border text-center", accuracy >= 80 ? "bg-green-500/10 border-green-500/20 text-green-300" : accuracy >= 60 ? "bg-yellow-500/10 border-yellow-500/20 text-yellow-300" : "bg-red-500/10 border-red-500/20 text-red-300")}>
+          <div className="flex items-center justify-center gap-2 mb-1">
+            {accuracy >= 80 ? <Zap className="w-5 h-5" /> : accuracy >= 60 ? <TrendingUp className="w-5 h-5" /> : <Target className="w-5 h-5" />}
+            <span className="font-semibold">{accuracy >= 80 ? 'Excellent!' : accuracy >= 60 ? 'Good effort!' : 'Keep practicing!'}</span>
+          </div>
+        </div>
+
+        <div className="flex gap-4">
+          <button onClick={() => navigate('/practice')} className="flex-1 py-4 rounded-xl font-semibold bg-indigo-600 hover:bg-indigo-500 transition-all flex items-center justify-center gap-2">
+            <RotateCcw className="w-5 h-5" /> Practice Again
+          </button>
+          <button onClick={() => navigate('/battle/lobby')} className="flex-1 py-4 rounded-xl font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-center gap-2">
+            <ArrowRight className="w-5 h-5" /> Battle Mode
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
