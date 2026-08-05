@@ -48,3 +48,8 @@ export default function ResultsPage() {
     </div>
   );
 
+  const accuracy = results?.accuracy || 0;
+  const totalScore = results?.total_score || 0;
+  const correct = results?.correct || 0;
+  const wrong = results?.wrong || 0;
+
