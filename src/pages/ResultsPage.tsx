@@ -18,3 +18,17 @@ export default function ResultsPage() {
     fetchResults();
   }, [sessionId]);
 
+  const fetchResults = async () => {
+    try {
+      const data = await apiFetch('/api/practice/finish', {
+        method: 'POST',
+        body: JSON.stringify({ session_id: sessionId }),
+      });
+      setResults(data);
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
