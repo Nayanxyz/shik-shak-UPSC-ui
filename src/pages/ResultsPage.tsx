@@ -5,3 +5,11 @@ import { Trophy, Target, CheckCircle, XCircle, RotateCcw, ArrowRight, Zap, Trend
 import { cn } from '../lib/utils';
 import { apiFetch } from '../lib/api';
 
+export default function ResultsPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const sessionId = new URLSearchParams(location.search).get('sessionId');
+  const [results, setResults] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
