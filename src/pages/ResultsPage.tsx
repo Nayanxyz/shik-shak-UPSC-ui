@@ -13,3 +13,8 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (!sessionId) { navigate('/practice'); return; }
+    fetchResults();
+  }, [sessionId]);
+
