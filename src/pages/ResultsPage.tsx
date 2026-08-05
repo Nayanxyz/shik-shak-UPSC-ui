@@ -53,3 +53,15 @@ export default function ResultsPage() {
   const correct = results?.correct || 0;
   const wrong = results?.wrong || 0;
 
+  return (
+    <div className="max-w-2xl mx-auto">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
+        <div className="text-center">
+          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }}
+            className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4">
+            <Trophy className="w-10 h-10 text-white" />
+          </motion.div>
+          <h1 className="text-3xl font-bold">Practice Complete!</h1>
+          <p className="text-slate-400 mt-2">Here's how you performed</p>
+        </div>
+
