@@ -65,3 +65,31 @@ export default function ResultsPage() {
           <p className="text-slate-400 mt-2">Here's how you performed</p>
         </div>
 
+        <div className="p-8 rounded-2xl bg-gradient-to-br from-indigo-900/50 to-purple-900/50 border border-indigo-500/20 text-center">
+          <div className="text-6xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent">{totalScore}</div>
+          <div className="text-slate-400 mt-2">Total Score</div>
+        </div>
+
+        <div className="grid grid-cols-4 gap-4">
+          <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-center">
+            <CheckCircle className="w-6 h-6 text-green-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-green-300">{correct}</div>
+            <div className="text-xs text-slate-400">Correct</div>
+          </div>
+          <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-center">
+            <XCircle className="w-6 h-6 text-red-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-red-300">{wrong}</div>
+            <div className="text-xs text-slate-400">Wrong</div>
+          </div>
+          <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-center">
+            <Target className="w-6 h-6 text-blue-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-blue-300">{correct + wrong}</div>
+            <div className="text-xs text-slate-400">Total</div>
+          </div>
+          <div className="p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-center">
+            <Target className="w-6 h-6 text-indigo-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-indigo-300">{accuracy}%</div>
+            <div className="text-xs text-slate-400">Accuracy</div>
+          </div>
+        </div>
+
