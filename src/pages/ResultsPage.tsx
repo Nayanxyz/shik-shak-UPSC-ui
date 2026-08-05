@@ -32,3 +32,10 @@ export default function ResultsPage() {
     }
   };
 
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center py-32">
+      <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin mb-4" />
+      <p className="text-slate-400">Loading results...</p>
+    </div>
+  );
+
