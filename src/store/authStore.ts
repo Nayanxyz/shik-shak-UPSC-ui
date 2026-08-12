@@ -18,3 +18,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: true,
 
+  loadUser: async () => {
+    const u = await getCurrentUser()
+    if (!u) { set({ user: null, loading: false }); return }
+    const meta = u.user_metadata || {}
