@@ -7,3 +7,10 @@ interface User {
   username: string
 }
 
+interface AuthState {
+  user: User | null
+  loading: boolean
+  loadUser: () => Promise<void>
+  signOut: () => Promise<void>
+}
+
