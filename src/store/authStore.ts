@@ -22,3 +22,13 @@ export const useAuthStore = create<AuthState>((set) => ({
     const u = await getCurrentUser()
     if (!u) { set({ user: null, loading: false }); return }
     const meta = u.user_metadata || {}
+    set({
+      user: {
+        id: u.id,
+        email: u.email!,
+        username: meta.username || u.email!.split('@')[0],
+      },
+      loading: false,
+    })
+  },
+
