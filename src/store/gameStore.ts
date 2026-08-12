@@ -26,3 +26,14 @@ interface GameState {
   reset: () => void
 }
 
+export const useGameStore = create<GameState>((set) => ({
+  roomCode: null,
+  isHost: false,
+  players: [],
+  currentQuestion: 0,
+  totalQuestions: 5,
+  timeRemaining: 60,
+  questions: [],
+  questionResults: null,
+  finalRankings: [],
+
