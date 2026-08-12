@@ -7,3 +7,10 @@ interface Question {
   time_limit?: number
 }
 
+interface GameState {
+  roomCode: string | null
+  isHost: boolean
+  players: any[]
+  currentQuestion: number
+  totalQuestions: number
+  timeRemaining: number
