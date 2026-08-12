@@ -17,3 +17,12 @@ interface GameState {
   questions: Question[]
   questionResults: any
   finalRankings: any[]
+  setRoom: (code: string | null, isHost: boolean) => void
+  setPlayers: (players: any[]) => void
+  setQuestion: (q: Question, total: number) => void
+  setTimeRemaining: (t: number) => void
+  setQuestionResults: (r: any) => void
+  setFinalRankings: (r: any[]) => void
+  reset: () => void
+}
+
