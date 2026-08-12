@@ -14,3 +14,6 @@ interface GameState {
   currentQuestion: number
   totalQuestions: number
   timeRemaining: number
+  questions: Question[]
+  questionResults: any
+  finalRankings: any[]
