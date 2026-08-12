@@ -51,3 +51,7 @@ export const useGameStore = create<GameState>((set) => ({
     }
   }),
 
+  setTimeRemaining: (t) => set({ timeRemaining: t }),
+  setQuestionResults: (r) => set({ questionResults: r }),
+  setFinalRankings: (r) => set({ finalRankings: r }),
+
