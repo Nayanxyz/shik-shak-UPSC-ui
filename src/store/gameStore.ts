@@ -40,3 +40,14 @@ export const useGameStore = create<GameState>((set) => ({
   setRoom: (code, isHost) => set({ roomCode: code, isHost }),
   setPlayers: (players) => set({ players }),
 
+  setQuestion: (q, total) => set((state) => {
+    const nextQuestions = q.question_number === 1 ? [q] : [...state.questions, q]
+    return {
+      currentQuestion: q.question_number,
+      totalQuestions: total,
+      questions: nextQuestions,
+      timeRemaining: q.time_limit || 60,
+      questionResults: null,
+    }
+  }),
+
