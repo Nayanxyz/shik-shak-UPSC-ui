@@ -490,6 +490,7 @@ export default function PracticePage() {
                   ) : (
                     <XCircle className="w-6 h-6 text-red-400 shrink-0" />
                   )}
+                  
                   <div>
                     <div className={cn("font-semibold", result?.is_correct ? "text-green-300" : "text-red-300")}>
                       {result?.is_correct ? 'Correct! +' + result.score + ' points' : 'Incorrect (-1 point)'}
