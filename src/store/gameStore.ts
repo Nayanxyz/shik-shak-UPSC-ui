@@ -55,6 +55,7 @@ export const useGameStore = create<GameState>((set) => ({
   setQuestionResults: (r) => set({ questionResults: r }),
   setFinalRankings: (r) => set({ finalRankings: r }),
 
+  
   reset: () => set({
     roomCode: null,
     isHost: false,
