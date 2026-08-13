@@ -394,6 +394,7 @@ export default function BattleGame() {
                 transition={{ type: "spring", delay: 0.2 }}
                 className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center mb-4"
               >
+          
                 <Trophy className="w-10 h-10 text-white" />
               </motion.div>
               <h2 className="text-3xl font-bold">Battle Complete!</h2>
