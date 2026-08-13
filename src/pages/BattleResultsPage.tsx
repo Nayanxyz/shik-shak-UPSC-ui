@@ -65,6 +65,7 @@ export default function BattleResultsPage() {
           ))}
         </div>
 
+
         <div className="flex gap-4">
           <button onClick={() => { useGameStore.getState().reset(); navigate('/battle/lobby'); }}
             className="flex-1 py-4 rounded-xl font-semibold bg-indigo-600 hover:bg-indigo-500 transition-all flex items-center justify-center gap-2">
