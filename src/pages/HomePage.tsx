@@ -81,7 +81,8 @@ export default function HomePage() {
             { label: 'Battle Players', value: '4', sub: 'Max per room' },
             { label: 'Time Limit', value: '60s', sub: 'Per question' },
           ].map((stat) => (
-            <div key={stat.label}>
+           
+           <div key={stat.label}>
               <div className="text-3xl font-bold text-indigo-300">{stat.value}</div>
               <div className="text-sm font-medium mt-1">{stat.label}</div>
               <div className="text-xs text-slate-400">{stat.sub}</div>
