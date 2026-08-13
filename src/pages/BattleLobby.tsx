@@ -476,6 +476,7 @@ export default function BattleLobby() {
         </motion.div>
       )}
 
+
       {/* JOIN */}
       {mode === 'join' && !roomCode && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 max-w-md mx-auto">
