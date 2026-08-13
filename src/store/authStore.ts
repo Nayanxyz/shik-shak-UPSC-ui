@@ -32,6 +32,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     })
   },
 
+  
   signOut: async () => {
     await sbSignOut()
     set({ user: null, loading: false })
