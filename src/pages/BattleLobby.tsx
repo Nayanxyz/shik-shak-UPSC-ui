@@ -291,7 +291,7 @@ export default function BattleLobby() {
       user_id: authUser?.id,
     });
   };
-  
+
 
   const leaveRoom = () => {
     const socket = getSocket();
@@ -302,6 +302,7 @@ export default function BattleLobby() {
     setQuestionsReady(false);
     setMode('menu');
   };
+  
 
   const kickPlayer = (targetSid: string) => {
     const socket = getSocket();
