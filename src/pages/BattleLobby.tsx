@@ -206,7 +206,7 @@ export default function BattleLobby() {
       }
     };
     
-    
+
     const onDisconnect = () => setDisconnected(true);
     
     socket.on('room_created', onRoomCreated);
@@ -291,6 +291,7 @@ export default function BattleLobby() {
       user_id: authUser?.id,
     });
   };
+  
 
   const leaveRoom = () => {
     const socket = getSocket();
