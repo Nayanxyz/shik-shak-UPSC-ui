@@ -194,6 +194,7 @@ export default function BattleLobby() {
       setIsLoading(false);
     };
     
+    
     const onConnect = () => {
       setDisconnected(false);
       // Try to rejoin if we have a room
@@ -258,7 +259,7 @@ export default function BattleLobby() {
     setError('');
     setQuestionsReady(false);
     
-    
+
     socket.emit('create_room', {
       subject,
       difficulty,
