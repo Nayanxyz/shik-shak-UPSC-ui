@@ -376,6 +376,7 @@ export default function BattleLobby() {
           </button>
         </motion.div>
       )}
+      
 
       {/* CREATE */}
       {mode === 'create' && !roomCode && (
