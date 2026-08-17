@@ -7,7 +7,7 @@ const features = [
   { icon: <Brain className="w-6 h-6" />, title: 'AI-Powered Questions', desc: 'Groq LLM generates fresh JEE/NEET MCQs every time' },
   { icon: <Target className="w-6 h-6" />, title: 'Smart Validation', desc: 'Math/Physics checked with SymPy, Chemistry with PubChem' },
   { icon: <Users className="w-6 h-6" />, title: 'Live Battles', desc: 'Compete with up to 4 players in real-time' },
-  { icon: <Clock className="w-6 h-6" />, title: 'Time ', desc: 'Answer fast for extra points — speed matters!' },
+  { icon: <Clock className="w-6 h-6" />, title: 'Time ', desc: 'Answer in limit — speed matters!' },
 ];
 
 const subjects = [
