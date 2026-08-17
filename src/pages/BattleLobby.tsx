@@ -119,6 +119,7 @@ const MASTER_CHAPTER_DATABASE: Record<string, { id: string; name: string }[]> = 
   ]
 };
 
+
 function getRandomChapters(subject: string, count = 5) {
   const ch = MASTER_CHAPTER_DATABASE[subject];
   if (!ch || ch.length < count) return [];
@@ -193,7 +194,7 @@ export default function BattleLobby() {
       setError(data.message || 'Server error');
       setIsLoading(false);
     };
-    
+
     
     const onConnect = () => {
       setDisconnected(false);
