@@ -258,6 +258,7 @@ export default function BattleLobby() {
     setError('');
     setQuestionsReady(false);
     
+    
     socket.emit('create_room', {
       subject,
       difficulty,
@@ -376,7 +377,7 @@ export default function BattleLobby() {
           </button>
         </motion.div>
       )}
-      
+
 
       {/* CREATE */}
       {mode === 'create' && !roomCode && (
