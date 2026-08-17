@@ -206,6 +206,7 @@ export default function BattleLobby() {
       }
     };
     
+    
     const onDisconnect = () => setDisconnected(true);
     
     socket.on('room_created', onRoomCreated);
