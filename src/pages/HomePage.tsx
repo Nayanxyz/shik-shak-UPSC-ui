@@ -60,3 +60,21 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* Subjects */}
+      <section>
+        <h2 className="text-2xl font-bold text-center mb-8">Choose Your Subject</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {subjects.map((s, i) => (
+            <motion.button
+              key={s.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              onClick={() => navigate('/practice', { state: { selectedSubject: s.id } })}
+              // FIX: Use proper bg gradient classes instead of broken string manipulation
+              className={cn(
+                "p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all hover:scale-105 text-left group",
+                "bg-gradient-to-br",
+                s.bg
+              )}
+            >
