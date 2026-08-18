@@ -20,3 +20,43 @@ const subjects = [
 export default function HomePage() {
   const navigate = useNavigate()
 
+  return (
+    <div className="space-y-16">
+      {/* Hero */}
+      <section className="text-center py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm mb-6">
+            <Sparkles className="w-4 h-4" />
+            Powered by Nayanxyz
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Shik-Shak Arena
+            </span>
+          </h1>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+            The ultimate competitive exam battleground. Practice solo or battle friends with AI-generated JEE/NEET questions.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={() => navigate('/practice')}
+              className="flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-semibold text-lg transition-all hover:scale-105"
+            >
+              <Brain className="w-5 h-5" />
+              Start Practice
+            </button>
+            <button
+              onClick={() => navigate('/battle/lobby')}
+              className="flex items-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl font-semibold text-lg transition-all hover:scale-105"
+            >
+              <Swords className="w-5 h-5" />
+              Battle Arena
+            </button>
+          </div>
+        </motion.div>
+      </section>
+
