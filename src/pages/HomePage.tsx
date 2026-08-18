@@ -17,3 +17,6 @@ const subjects = [
   { id: 'BIOLOGY', name: 'Biology', color: 'from-pink-500 to-rose-500', icon: '🧬', bg: 'from-pink-500/10 to-rose-500/10' },
 ]
 
+export default function HomePage() {
+  const navigate = useNavigate()
+
